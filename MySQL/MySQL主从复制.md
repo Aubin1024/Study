@@ -1,3 +1,4 @@
+我的[github](https://github.com/Aubin1024/Study)
 # 安装MySQL服务器
  - 安装数据库
 ```
@@ -101,13 +102,19 @@ Query OK, 0 rows affected (0.00 sec)
 
  - 导出主库中已经有的数据
 ```
-mysqldump -u root -p -h 127.0.0.1 shuaiguoxia blog > /bak.sql
+mysqldump -u root -p -h 127.0.0.1 --database shuaiguoxia  > /bak.sql
 Enter password: 
+# 导出时一定要--dabatase指定数据库
 ```
 
  - 将数据复制到从节点
 ```
 scp /bak.sql 192.168.1.175:/
+```
+
+ - 从节点导入从主节点复制的数据
+```
+mysql -u root -p < /bak.sql
 ```
 
  - 给从节点创建授权用户
@@ -144,6 +151,11 @@ MariaDB [(none)]> show master status;
 +------------------+----------+--------------+------------------+
 ```
 
+ - 从节点导入从主节点复制的数据
+```
+# 前面导入过就不同导入了，怕你忘了再提一句
+mysql -u root -p < /bak.sql
+```
  - 设定自动复制
 ```
 # 命令中的master_log_file和master_log_pos为主节点查询的结果
@@ -219,3 +231,17 @@ Master_SSL_Verify_Server_Cert: No
  - pos不对：检查从节点设定的开始pos是否为主节点正在进行的pos
  - 开始二进制文件不对：检查从节点开始的二进制文件是否为主节点整个在进行的二进制位内按
  - 防火墙限制：关闭防火墙
+ 
+# 从节点导入数据不生效
+
+- 主节点导出数据时要添加--databases参数
+```
+mysqldump -u root -p -h 127.0.0.1 --database shuaiguoxia  > /bak.sql
+Enter password: 
+# 导出时一定要--dabatase指定数据库
+```
+
+ - 从节点导入数据库是要使用mysql命令
+```
+mysql -u root -p < /bak.sql
+```
