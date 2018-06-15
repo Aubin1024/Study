@@ -97,16 +97,18 @@ DNS第一条写自己的iP，第二条可以写其他外网IP
 将共享云磁盘分别挂载到集群节点中(node1、node2)，在集群几点中添加磁盘，然后找到计算机->管理->文件和存储服务->磁盘，右键挂载的磁盘，选择联机，联机后，再右键，初始化，选择新建卷，并分配驱动器(这里用的是E盘、F盘)。如果磁盘无法使用，可以重启服务器，若共享磁盘无法显示则需要更新pvdriver驱动。
 
  - 清理sysprep  
-在node1、node2中执行如下命令
-c:/windows/System32/Sysprep/Sysprep.exe
+在node1、node2中执行如下命令  
+```
+c:/windows/System32/Sysprep/Sysprep.exe  
+```
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-12/56773222.jpg)
 
  - 创建虚拟私有云  
-节点需要用到第二块网卡，所以创建一个与之前不同网段的虚拟私有云，并创建一个网卡在新的网段中。
+节点需要用到第二块网卡，所以创建一个与之前不同网段的虚拟私有云，并创建一个网卡在新的网段中。  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-12/37181764.jpg)
 
  - 添加网卡  
-添加网卡，并选择新创建的网段
+添加网卡，并选择新创建的网段  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-12/2360701.jpg)
 
  - 第一张网卡配置DNS  
@@ -138,7 +140,7 @@ c:/windows/System32/Sysprep/Sysprep.exe
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/96774839.jpg)
 
  - 集群节点加入域  
-node1、node2打开计算机属性->更改设置，点击更改，输入正确的主机名与域名
+node1、node2打开计算机属性->更改设置，点击更改，输入正确的主机名与域名  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/32865091.jpg)
 
  - 加入成功  
@@ -147,104 +149,104 @@ node1、node2打开计算机属性->更改设置，点击更改，输入正确�
  - 允许域用户远程登录  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/92793600.jpg)
 
- - 注意事项
-  - node2的ip需要根据节点二自己的ip来配置
-  - node2的计算机名需要与节点一不同
+ - 注意事项  
+  - node2的ip需要根据节点二自己的ip来配置    
+  - node2的计算机名需要与节点一不同  
 
 
 # 故障转移集群搭建
- - 使用域管理员登录任意一节点
+ - 使用域管理员登录任意一节点  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/56271852.jpg)
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/81118521.jpg)
 
- - 打开故障转移集群
+ - 打开故障转移集群  
  ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/42926783.jpg)
 
- - 验证配置
+ - 验证配置  
  ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/27414816.jpg)
 
- - 下一步
+ - 下一步  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/10891281.jpg)
 
- - 输入解决节点的名称  
-主机名.域名，这里是node1.libin.com
+ - 输入解决节点的名称    
+主机名.域名，这里是node1.libin.com  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/14731275.jpg)
 
- - 下一步
+ - 下一步  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/98406968.jpg)
 
- - 下一步
+ - 下一步  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/42317128.jpg)
  
 
- - 验证
+ - 验证  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/92345531.jpg)
 
- - 等待验证完成
+ - 等待验证完成  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/49995767.jpg)
 
  - 验证完成  
-如果这一步提示该配置不合适进行群集，说明前面配置有问题，需要查看报告解决完问题再继续下面的步骤。
+如果这一步提示该配置不合适进行群集，说明前面配置有问题，需要查看报告解决完问题再继续下面的步骤。  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/80446775.jpg)
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/73917625.jpg)
 
- - 创建集群
+ - 创建集群  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/78708801.jpg)
 
- - 定名称
+ - 定名称  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/1057522.jpg)
 
- - 下一步
+ - 下一步  
  ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/64169403.jpg)
 
 
- - 等待创建集群
+ - 等待创建集群  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/39337286.jpg)
 
- - 集群创建成功
+ - 集群创建成功  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-13/71313759.jpg)
 
-# 集群状态验证
+# 集群状态验证  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/4052802.jpg)
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/25505634.jpg)
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/17923850.jpg)
-# MSDTS集群搭建
- - 配置角色
+# MSDTS集群搭建  
+ - 配置角色  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/88824270.jpg)
 
- - 下一步
+ - 下一步  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/8783169.jpg)
 
- - 选择分布式事务协调器
+ - 选择分布式事务协调器  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/1501628.jpg)
 
- - 集群名称
+ - 集群名称  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/66554802.jpg)
 
- - 选择磁盘
+ - 选择磁盘  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/74029991.jpg)
 
- - 下一步
+ - 下一步  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/19822160.jpg)
 
- - 角色配置成功
+ - 角色配置成功  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/8834241.jpg)
 
-# 共享卷验证
- - 此时node2为主节点，共享磁盘挂载在node2节点，对于node1磁盘不可见
+# 共享卷验证  
+ - 此时node2为主节点，共享磁盘挂载在node2节点，对于node1磁盘不可见  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/80761474.jpg)
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/53839819.jpg)
 
  - 故障转移  
-关闭node2节点
+关闭node2节点  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/38363459.jpg)
-磁盘自动转移到node1节点
+磁盘自动转移到node1节点  
 ![](http://shuaiguoxia-img.oss-cn-beijing.aliyuncs.com/18-6-14/75995972.jpg)
 
-# 故障排除
-解决方法:远程计算机需要网络级别身份验证
+# 故障排除  
+解决方法:远程计算机需要网络级别身份验证  
 https://jingyan.baidu.com/article/380abd0a713f061d91192c63.html
 
 
- - 无法建立集群
+ - 无法建立集群  
 两台节点可以pingIP通，ping域名通，如果ping不同，排查网络，排查域控制器中的DNS正向解析
